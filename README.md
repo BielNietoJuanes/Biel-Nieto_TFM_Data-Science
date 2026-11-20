@@ -7,7 +7,7 @@ Proyecto del Trabajo Final de Máster para explorar la evolución de la renta me
 | Fase | Contenido | Estado |
 |---|---|---|
 | Propuesta | Comparación de tres ideas de producto y selección del observatorio del alquiler | Completada — [Entrega 01](docs/entregas/01_ideas_producto.md) |
-| Preparación de datos | Descarga, limpieza y construcción de las capas Bronce, Plata y Oro | Implementada y ejecutada — [Entrega 02](docs/entregas/02_datos_y_preparacion.md) |
+| Preparación de datos | Descarga, limpieza y construcción de las capas Bronze, Silver y Gold | Implementada y ejecutada — [Entrega 02](docs/entregas/02_datos_y_preparacion.md) |
 | Modelado | Comparación de modelos con partición temporal y guardado del modelo seleccionado | Implementada y ejecutada — [Entrega 03](docs/entregas/03_modelado.md) |
 | Aplicación | Cuadro de mando para explorar los resultados | Pendiente |
 
@@ -33,9 +33,9 @@ data/gold/alquiler_municipios_dataset.csv
 models/ y reports/
 ```
 
-- **Bronce:** conserva la descarga original.
-- **Plata:** normaliza los nombres y tipos de las columnas, conserva el código municipal como texto y trata marcadores de confidencialidad como ausentes. Se filtran los registros cuyo ámbito es `Municipi`.
-- **Oro:** genera `fecha_periodo` a partir de los periodos publicados, incluyendo etiquetas como `gener-març`, `abril-juny` y `gener-desembre`.
+- **Bronze:** conserva la descarga original.
+- **Silver:** normaliza los nombres y tipos de las columnas, conserva el código municipal como texto y trata marcadores de confidencialidad como ausentes. Se filtran los registros cuyo ámbito es `Municipi`.
+- **Gold:** genera `fecha_periodo` a partir de los periodos publicados, incluyendo etiquetas como `gener-març`, `abril-juny` y `gener-desembre`.
 - **Modelado:** utiliza `renta_euros_mes` como objetivo y el municipio, año y trimestre como variables de entrada. Compara Ridge, HistGradientBoosting y una referencia basada en la mediana histórica municipal. La evaluación reserva los periodos más recientes para prueba.
 
 Los datos de `data/` y los modelos de `models/` se generan localmente y están excluidos del control de versiones por `.gitignore`. Hay que ejecutar el proceso de datos para reconstruirlos.
@@ -46,9 +46,9 @@ Resultados calculados sobre los archivos disponibles localmente; pueden cambiar 
 
 | Indicador | Resultado |
 |---|---:|
-| Filas en Bronce, Plata y Oro | 47.541 |
+| Filas en Bronze, Silver y Gold | 47.541 |
 | Municipios | 945 |
-| Fechas interpretables en Oro | 47.541 |
+| Fechas interpretables en Gold | 47.541 |
 | Rentas positivas | 26.594 |
 | Rentas ausentes | 20.947 |
 | Periodos usados por el modelo | 42 |
@@ -93,7 +93,7 @@ Descarga y procesa los datos, y después entrena los modelos:
 .\.venv\Scripts\python.exe src\models\train_models.py
 ```
 
-Si ya existe una capa Oro actualizada, se puede ejecutar solo el entrenamiento:
+Si ya existe una capa Gold actualizada, se puede ejecutar solo el entrenamiento:
 
 ```powershell
 .\.venv\Scripts\python.exe src\models\train_models.py
