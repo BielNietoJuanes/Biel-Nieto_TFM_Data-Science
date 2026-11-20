@@ -87,13 +87,3 @@ python src/datos/crear_dataset.py
 
 ## 7. Reproducibilidad
 Los scripts están en `src/datos/`. La fuente se identifica con `qww9-bvhh`. Anota la fecha de descarga en la revisión final, porque el portal actualiza los datos trimestralmente.
-
-## 8. Git y entrega
-Una vez ejecutado el proceso y completada la tabla:
-```bash
-git add README.md requirements.txt docs/entregas/02_datos_y_preparacion.md src/datos
-git commit -m "feat: implementar proceso de preparación de datos"
-git push
-git tag v0.2-entrega-02
-git push origin v0.2-entrega-02
-```
