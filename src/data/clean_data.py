@@ -37,7 +37,7 @@ def main():
     datos["anio"] = convertir_numero(datos["anio"]).astype("Int64")
     datos["contratos"] = convertir_numero(datos["contratos"]).astype("Int64")
     datos["renta_euros_mes"] = convertir_numero(datos["renta_euros_mes"])
-    datos = datos[datos["ambito_territorial"].str.casefold().eq("municipal")].copy()
+    datos = datos[datos["ambito_territorial"].str.casefold().eq("municipi")].copy()
     datos = datos.drop_duplicates(subset=["codigo_territorial", "anio", "periodo"], keep="last")
     datos = datos.sort_values(["codigo_territorial", "anio", "periodo"])
     datos.loc[datos["contratos"] < 0, "contratos"] = pd.NA

@@ -6,16 +6,28 @@ import pandas as pd
 RAIZ = Path(__file__).resolve().parents[2]
 ORIGEN = RAIZ / "data" / "silver" / "alquiler_municipios_limpio.csv"
 DESTINO = RAIZ / "data" / "gold" / "alquiler_municipios_dataset.csv"
+TRIMESTRES_POR_PERIODO = {
+    "gener-març": 1,
+    "abril-juny": 2,
+    "gener-juny": 2,
+    "juliol-setembre": 3,
+    "gener-setembre": 3,
+    "octubre-desembre": 4,
+    "gener-desembre": 4,
+}
 
 
 def inicio_trimestre(anio, periodo):
     """Devuelve la fecha inicial del trimestre si el periodo se puede interpretar."""
     if pd.isna(anio) or pd.isna(periodo):
         return pd.NA
-    coincidencia = re.search(r"(?:T|Q)([1-4])|([1-4])(?:T|Q)", str(periodo).strip().upper())
-    if not coincidencia:
-        return pd.NA
-    trimestre = int(coincidencia.group(1) or coincidencia.group(2))
+    periodo_limpio = str(periodo).strip().casefold()
+    trimestre = TRIMESTRES_POR_PERIODO.get(periodo_limpio)
+    if trimestre is None:
+        coincidencia = re.search(r"(?:T|Q)([1-4])|([1-4])(?:T|Q)", periodo_limpio.upper())
+        if not coincidencia:
+            return pd.NA
+        trimestre = int(coincidencia.group(1) or coincidencia.group(2))
     mes = (trimestre - 1) * 3 + 1
     return f"{int(anio):04d}-{mes:02d}-01"
 
